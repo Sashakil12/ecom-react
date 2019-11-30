@@ -12,5 +12,5 @@ const CartDropdown = () =>(
         <CustomButton>CHECKOUT</CustomButton>
     </div>  
 )
-
+  
 export default CartDropdown;
