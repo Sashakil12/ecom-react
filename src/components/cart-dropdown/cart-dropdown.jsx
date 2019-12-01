@@ -6,7 +6,7 @@ import './styles.scss';
 
 import { createStructuredSelector } from 'reselect'
 import CartItem from '../cart-items/cartItem.comp'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { cartItemsSelector } from '../../redux/cart/cart.selector'
 const CartDropdown = ({items, history, dispatch}) =>(
     <div className='cart-dropdown'>
@@ -19,8 +19,7 @@ const CartDropdown = ({items, history, dispatch}) =>(
             }
             </div>
         <CustomButton onClick={()=> {history.push("/checkout");
-                                            dispatch(toggleCartHidden())
-                                            } }> CHECKOUT </CustomButton>
+                                    dispatch(toggleCartHidden())    }}> CHECKOUT </CustomButton>
     </div>   
 )
 
