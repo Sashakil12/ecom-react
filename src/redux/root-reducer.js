@@ -7,6 +7,6 @@ export default combineReducers({
     user: userReducer,
     cart: cartReducer,
     directory: directoryReducer,
-    collections,
+    shop: collections,
     
 })
