@@ -3,8 +3,8 @@ import './collection.styles.scss';
 import { selectCollection } from '../../redux/collection-items/collectionSelector'
 import CollectionItem from '../../components/collection-item/collection-item.components'
 import { connect } from 'react-redux'
-const CollectionPage = ({collection}) =>{
-        const { title, items } = collection;
+const CollectionPage = ({ collection }) =>{
+    const { title, items } = collection;
     return(
     <div className='collection-page'>
         <h2 className="title">{ title }</h2>
@@ -20,7 +20,7 @@ const mapStateToProp = (state, ownProps) => ({
     collection: selectCollection(ownProps.match.params.collectionId)(state)
 })
 
-export default connect(mapStateToProp)(CollectionPage);
+export default connect(mapStateToProp)(CollectionPage);  
 
 //mapStateToProps takes two arguments one is "state" 
             //- the state that comes from its reducer

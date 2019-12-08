@@ -1,14 +1,28 @@
 import collectionActionTypes from './collection.types';
 const INITIAL_STATE = {
-    collection: null
+    collections: null,
+    isFetching: false,
+    errorMessage: undefined
 }
+
 const collectionReducer = (state= INITIAL_STATE, action)=>{
     switch(action.type){
-        case collectionActionTypes.UPDATE_COLLECTIONS:
+        case collectionActionTypes.COLLECTION_FETCH_STARTED:
         return {
             ...state,
-            collections: action.payload
+            isFetching: true
         }
+        case collectionActionTypes.COLLECTION_FETCH_SUCCESS:
+            return{
+                ...state,
+                isFetching: false,
+                collections: action.payload
+            }
+            case collectionActionTypes.COLLECTION_FETCH_FAILED:
+                return{
+                    isFetching: false,
+                    errorMessage: action.payload
+                }
         default:    
         return state;
     }
