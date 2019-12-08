@@ -13,11 +13,13 @@ import {auth, createUserProfileDocument} from './firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
 import { selectCurrentUser } from './redux/user/user.selector'
+
 class App extends React.Component {
  
   unSubscribeFromAuth = null;
   componentDidMount(){
-    const { setCurrentUser } = this.props
+
+    const { setCurrentUser} = this.props
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if(userAuth){
         const userRef = await createUserProfileDocument(userAuth)
@@ -30,9 +32,10 @@ class App extends React.Component {
         
       }else{
         setCurrentUser(userAuth)
+        
       }
     })
-}
+}  
 
   componentWillUnmount(){
     this.unSubscribeFromAuth()
@@ -53,7 +56,7 @@ class App extends React.Component {
 }
 
 const mapStateToProp = createStructuredSelector({
-  currentUser:selectCurrentUser
+  currentUser:selectCurrentUser,
 })
 const mapDispatchToProp = dispatch =>({
   setCurrentUser: user => dispatch(setCurrentUser(user))
