@@ -6,12 +6,12 @@ import CartIcon from '../cart-icon/cart-icon-component'
 import CartDropdown from '../cart-dropdown/cart-dropdown'
 import {Link} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/crowns.svg'
-import {auth} from '../../firebase/firebase.utils'
+import { createStructuredSelector } from 'reselect'
 import { selectCurrentUser } from '../../redux/user/user.selector'
 import { selectCartVisibility } from '../../redux/cart/cart.selector'
-import { createStructuredSelector } from 'reselect'
+import { userSignOutStart } from '../../redux/user/user.actions'
 
-const Header = ({currentUser, hidden})=>{
+const Header = ({ currentUser, hidden, signOutStart})=>{
     return (
     <div className="header">
         <Link className="logo-container" to='/'>
@@ -25,10 +25,10 @@ const Header = ({currentUser, hidden})=>{
                     CONTACT
                 </Link>
                 {currentUser ?
-                    (<div className="option" onClick={()=>auth.signOut()}>
+                    (<div className="option" onClick={() => signOutStart()}>
                                 SIGN OUT
                     </div>)
-                :
+                :  
                     (<Link className="option" to="/signin">
                         SIGN IN
                     </Link>)
@@ -38,16 +38,20 @@ const Header = ({currentUser, hidden})=>{
             {hidden? null : (<CartDropdown/>)}
     </div>)
 }
-    
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    hidden: selectCartVisibility
+}) 
+
+const mapDispatchToProps = dispatch => ({
+    signOutStart: () => dispatch(userSignOutStart())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
+
+
 // const mapStateToProps = (state) =>({
 //     currentUser: selectCurrentUser(state),
 //     hidden: selectCartVisibility(state)
 // })
 
 //Same as above; use createStructuredselector to repeatedly avoid passing (state)
-const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser,
-    hidden: selectCartVisibility
-}) 
-
-export default connect(mapStateToProps)(Header)
