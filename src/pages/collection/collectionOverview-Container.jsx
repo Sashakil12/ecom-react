@@ -14,3 +14,4 @@ const CollectionOverviewContainer =  compose(
     WithSpinner,
 )(CollectionOverview)
 export default CollectionOverviewContainer
+
